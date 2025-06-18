@@ -23,20 +23,22 @@ const OnboardingForm = ({ onVerificationComplete }) => {
   }, [formData.gstin]);
 
   const validateField = (name, value) => {
-    let error = '';
-    switch (name) {
-      case 'vendorName':
-        error = value ? '' : 'Required';
-        break;
-      case 'gstin':
-        error = isValidGSTIN ? '' : 'Invalid format (e.g. 22ABCDE1234F1Z5)';
-        break;
-      case 'phone':
-        error = /^[0-9]{10}$/.test(value) ? '' : '10 digits required';
-        break;
-    }
-    setErrors({ ...errors, [name]: error });
-  };
+  let error = '';
+  switch (name) {
+    case 'vendorName':
+      error = value ? '' : 'Required';
+      break;
+    case 'gstin':
+      error = isValidGSTIN ? '' : 'Invalid format (e.g. 22ABCDE1234F1Z5)';
+      break;
+    case 'phone':
+      error = /^[0-9]{10}$/.test(value) ? '' : '10 digits required';
+      break;
+    default:
+      break; // Add this default case
+  }
+  setErrors({ ...errors, [name]: error });
+};
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
